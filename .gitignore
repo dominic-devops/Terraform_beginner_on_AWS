@@ -4,3 +4,4 @@
 *.exe
 *.tfstate
 *.tfstate.backup
+*.sh
