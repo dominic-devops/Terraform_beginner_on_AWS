@@ -1,7 +1,0 @@
-##AWS Terraform Ignore Filre ##
-*.json
-*.hcl
-*.exe
-*.tfstate
-*.tfstate.backup
-*.sh
