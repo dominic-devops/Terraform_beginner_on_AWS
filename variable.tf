@@ -28,3 +28,8 @@ variable "public_subnet" {
   type    = list(any)
   default = ["10.0.10.0/24", "10.0.11.0/24"]
 }
+
+variable "key_name" {
+  type    = string
+  default = "terraform-dev"
+}

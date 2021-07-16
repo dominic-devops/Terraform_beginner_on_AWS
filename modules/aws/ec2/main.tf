@@ -1,13 +1,18 @@
 resource "aws_instance" "ec2" {
   for_each                    = var.ec2_instance
+   tags = {Name = each.key}
   ami                         = each.value.image
+ # availability_zone           = each.value.avail_zones
+  subnet_id                   = each.value.subnet_id
   instance_type               = each.value.instance_type
-  key_name                    = var.key_name
-#  vpc_security_group_ids      = each.value.vpc_security_group_ids
   associate_public_ip_address = each.value.associate_public_ip_address
-  subnet_id                   = each.value.public_subnet
+
   private_ip                  = each.value.private_ip
-  disable_api_termination     = true
+ 
+  key_name                    = var.key_name
+  disable_api_termination     = false
+
+
 
   # ebs_optimized = var.ebs_optimized
 
