@@ -6,9 +6,7 @@ resource "aws_instance" "ec2" {
   subnet_id                   = each.value.subnet_id
   instance_type               = each.value.instance_type
   associate_public_ip_address = each.value.associate_public_ip_address
-
   private_ip                  = each.value.private_ip
- 
   key_name                    = var.key_name
   disable_api_termination     = false
 

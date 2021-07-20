@@ -6,15 +6,22 @@ module "ec2_instance" {
 
 
   ec2_instance = {
-  #  test-web-01 = {
-  #   image         = "ami-0b276ad63ba2d6009"
-  #   subnet_id     = "subnet-0d7f19f301691c98f"
-  #   private_ip    = "10.0.10.11"
-  #   instance_type = "t2.micro"
-  #   associate_public_ip_address = "true"
-
-  #   vpc_security_group_ids= [""]
-  #  }
+    test-web-01 = {
+     image         = "ami-0b276ad63ba2d6009"
+     subnet_id     = "subnet-00a67fbf5d8aa93bf"
+     private_ip    = "10.0.10.11"
+     instance_type = "t2.micro"
+     associate_public_ip_address = "true"
+#     vpc_security_group_ids= [""]
+    }
+#    test-web-02 = {
+#     image         = "ami-0b276ad63ba2d6009"
+#     subnet_id     = "subnet-0d7f19f301691c98f" 
+#     private_ip    = "10.0.11.11"
+#     instance_type = "t2.micro"
+#     associate_public_ip_address = "true"
+#     vpc_security_group_ids= [""]
+#    }    
 
     #####
   }

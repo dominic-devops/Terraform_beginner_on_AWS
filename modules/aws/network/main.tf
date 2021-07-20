@@ -5,7 +5,7 @@ resource "aws_vpc" "vpc" {
     cidr_block = var.vpc_cidr
     instance_tenancy = "default"
       tags = {
-    Name ="${var.vpc_name}-${var.env_name}-vpc"
+    Name ="-${var.env_name}-${var.vpc_name}-vpc"
   }
 }
 
@@ -17,7 +17,7 @@ resource "aws_subnet" "public_subnet" {
     availability_zone = var.avail_zones[count.index]
 
     tags = {
-        Name = "${var.vpc_name}-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
+        Name = "${var.vpc_name}-sub-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
     }    
   }
 

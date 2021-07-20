@@ -10,7 +10,7 @@ variable "profile" {
 }
 variable "vpc_name" {
   description = "Set VPC NAME"
-  default     = "aws-terraform"
+  default     = "terraform"
 }
 variable "env_name" {
   description = "Set ENV NAME"
