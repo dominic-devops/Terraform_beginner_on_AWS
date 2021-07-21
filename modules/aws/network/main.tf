@@ -34,8 +34,10 @@ resource "aws_route_table" "public_rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
+    tags = {
+        Name = "${var.vpc_name}-public_rt"
+    }      
 }
-
 # route table association
 resource "aws_route_table_association" "public_rt_asso" {
   count = length(var.pub_sub_cidr)

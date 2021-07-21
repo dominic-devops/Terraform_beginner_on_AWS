@@ -16,7 +16,7 @@ variable "vpc_id" {
 }
 ### subnet ###
 variable "avail_zones" {
-    description = "dokyo Region az"
+    description = "Region az"
     type        = list    
 }
 variable "pub_sub_cidr" {

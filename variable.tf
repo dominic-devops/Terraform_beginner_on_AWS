@@ -22,11 +22,11 @@ variable "vpc_cidr" {
 }
 variable "avail_zones" {
   type    = list(any)
-  default = ["ap-northeast-1a", "ap-northeast-1c"]
+  default = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1a"]
 }
 variable "public_subnet" {
   type    = list(any)
-  default = ["10.0.10.0/24", "10.0.11.0/24"]
+  default = ["10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
 }
 
 variable "key_name" {
