@@ -22,3 +22,8 @@ output "public_route_table_ids" {
   description = "Public Route Table ID list"
   value       = aws_route_table.public_rt.*.id
 }
+
+#output "sg_id" {
+#  description = "Interget Gateway ID"
+#  value       = aws_security_group.sg.id
+#}

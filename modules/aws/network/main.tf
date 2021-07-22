@@ -1,5 +1,5 @@
 #################################
-##### VPC Module [21-07-08] #####
+##### VPC Module [21-07-21] #####
 #################################
 resource "aws_vpc" "vpc" {
     cidr_block = var.vpc_cidr
@@ -44,4 +44,25 @@ resource "aws_route_table_association" "public_rt_asso" {
 
   subnet_id      = aws_subnet.public_subnet.*.id[count.index]
   route_table_id = aws_route_table.public_rt.id
+}
+#################################
+##### SG Module [21-07-21] ######
+#################################
+
+resource "aws_security_group" "security_group" {
+  for_each    = var.security_group
+  name        = each.key
+  description = "Allow TLS inbound traffic"
+  vpc_id      = var.vpc_id
+
+  dynamic "ingress" {
+    for_each = each.value.ingress == null ? [] : each.value.ingress
+    content {
+    description      = lookup(ingress.value, "description", null)
+    cidr_blocks      = lookup(ingress.value, "cidr_blocks", null)
+    from_port        = lookup(ingress.value, "from_port", null)
+    to_port          = lookup(ingress.value, "to_port", null)
+    protocol         = lookup(ingress.value, "protocol", null)
+    }
+  }
 }
