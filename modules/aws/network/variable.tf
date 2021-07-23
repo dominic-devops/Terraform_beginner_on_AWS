@@ -24,13 +24,19 @@ variable "pub_sub_cidr" {
     type        = list
 }
 variable "security_group" {
-    type = map(object({
-      ingress            = list(object({
-        cidr_blocks      = list(string)
-        from_port        = string
-        to_port          = string
-        protocol         = string
-      }))   
-    }))
-    default = {}
+  type = map(object({
+  ingress = map(object({
+    from_port = number
+    to_port   = number
+    protocol = string
+    cidr_blocks = list(string)
+  }))
+  egress = map(object({
+    from_port = number
+    to_port   = number
+    protocol = string
+    cidr_blocks = list(string)
+  }))
+  }))
+  default = {}
 }

@@ -9,15 +9,21 @@ module "network" {
   avail_zones  = var.avail_zones
   pub_sub_cidr = var.public_subnet
 
-
-##### allow rule #####
-  security_group = {
-    ingress = { 
-        cidr_block = ["0.0.0.0/0"],
-        from_port = "80",
-        to_port = "80",
-        protocol = "tcp"
-        }
-  #  }
+#######################
+security_group = {
+#######################
+  test-web = {
+    ingress = {
+      http = {
+      protocol = "tcp"
+      from_port = 80
+      to_port   = 80
+      cidr_blocks = ["0.0.0.0/0",]
+      }
+     }
+    egress = {
+    }
   }
+#####  
+}
 }

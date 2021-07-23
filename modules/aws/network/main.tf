@@ -48,21 +48,36 @@ resource "aws_route_table_association" "public_rt_asso" {
 #################################
 ##### SG Module [21-07-21] ######
 #################################
+resource "aws_security_group" "sg" {
+  for_each = var.security_group
+  name   = each.key
+  description = "${each.key} description"
 
-resource "aws_security_group" "security_group" {
-  for_each    = var.security_group
-  name        = each.key
-  description = "Allow TLS inbound traffic"
-  vpc_id      = var.vpc_id
-
-  dynamic "ingress" {
-    for_each = each.value.ingress == null ? [] : each.value.ingress
-    content {
-    description      = lookup(ingress.value, "description", null)
-    cidr_blocks      = lookup(ingress.value, "cidr_blocks", null)
-    from_port        = lookup(ingress.value, "from_port", null)
-    to_port          = lookup(ingress.value, "to_port", null)
-    protocol         = lookup(ingress.value, "protocol", null)
+  vpc_id = var.vpc_id
+  tags = {
+    Name = each.key
+  }
+  
+  dynamic "ingress"{
+  for_each = each.value.ingress
+  iterator = in
+  content {
+    description = "${in.key} description"
+    from_port   = in.value["from_port"]
+    to_port     = in.value["to_port"]
+    protocol    = in.value["protocol"]
+    cidr_blocks = in.value["cidr_blocks"]
+    }
+  }
+  dynamic "egress"{
+  for_each = each.value.egress
+  iterator = out
+  content {
+    description = "${out.key} description"
+    from_port   = out.value["from_port"]
+    to_port     = out.value["to_port"]
+    protocol    = out.value["protocol"]
+    cidr_blocks = out.value["cidr_blocks"]
     }
   }
 }
