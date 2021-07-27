@@ -11,6 +11,12 @@ Network module v1.1 업데이트 (Security 기본 생성 테스트)
 ## 2021-07-23 업데이트 내용 
 Network module v1.1 업데이트 (security groups 재생성/태깅 수정 및 완성)
 
+### 사용 방법
+1. AWS IAM console 내 Terraform 용 계정 Access/Secret Key 발급
+2. .aws/credentials 내 추가 후 [provider.tf] 경로 수정 필요
+ㄴ 프로필 별 설정 가능
+3. terraform init을 통해 모듈 불러온 뒤, terrafrom plan으로 구성 확인 후, apply로 동작확인
+
 ### EC2 module Input
 ```
     {인스턴스 명} = {

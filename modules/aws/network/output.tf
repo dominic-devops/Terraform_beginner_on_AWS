@@ -8,7 +8,7 @@ output "vpc_cidr_block" {
   value       = aws_vpc.vpc.cidr_block
 }
 # subnets
-output "public_subnets_ids" {
+output "public_subnet" {
   description = "Public Subnet ID list"
   value       = aws_subnet.public_subnet.*.id
 }
@@ -22,8 +22,3 @@ output "public_route_table_ids" {
   description = "Public Route Table ID list"
   value       = aws_route_table.public_rt.*.id
 }
-
-#output "sg_id" {
-#  description = "Interget Gateway ID"
-#  value       = aws_security_group.sg.id
-#}

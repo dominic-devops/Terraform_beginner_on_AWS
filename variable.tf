@@ -31,5 +31,5 @@ variable "public_subnet" {
 
 variable "key_name" {
   type    = string
-  default = "terraform-dev"
+  default = "home-test"
 }
