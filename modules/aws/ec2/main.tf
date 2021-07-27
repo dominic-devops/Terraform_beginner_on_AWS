@@ -6,10 +6,10 @@ resource "aws_instance" "ec2" {
   ami                         = each.value.image
   subnet_id                   = each.value.subnet_id
   instance_type               = each.value.instance_type
-  associate_public_ip_address = each.value.associate_public_ip_address
   private_ip                  = each.value.private_ip
   key_name                    = var.key_name
   disable_api_termination     = false
+  associate_public_ip_address = true
   ebs_optimized = "false" ## 최적화 지원 인스턴스로 Confirm될 경우 변경하거나 섞어쓸꺼면 variable선언필요
 
   dynamic "root_block_device" {

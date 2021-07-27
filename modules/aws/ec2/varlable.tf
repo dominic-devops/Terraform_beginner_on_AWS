@@ -4,7 +4,6 @@ variable "ec2_instance" {
       subnet_id                    = string
       private_ip                   = string
       instance_type                = string
-      associate_public_ip_address  = bool
       root_block_device             = list(object({
         volume_size   = number
         volume_type   = string
