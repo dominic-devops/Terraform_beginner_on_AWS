@@ -1,3 +1,12 @@
+output "subnet_info" {
+  value = [
+    for ins in module.network.self_link :
+    format("%s,%s",
+      ins.cidr_block,
+      ins.availability_zone,
+    )
+  ]
+}
 output "ec2_info" {
   value = [
     for ins in module.ec2_instance.self_link :
@@ -6,16 +15,6 @@ output "ec2_info" {
       ins.instance_type,
       ins.private_ip,
       ins.public_ip,
-    )
-  ]
-}
-
-output "subnet_info" {
-  value = [
-    for ins in module.network.self_link :
-    format("%s,%s",
-      ins.cidr_block,
-      ins.availability_zone,
     )
   ]
 }

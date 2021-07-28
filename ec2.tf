@@ -7,7 +7,7 @@ module "ec2_instance" {
   ec2_instance = {
     test-web-01 = {
       image                       = "ami-0b276ad63ba2d6009"
-      subnet_id                   = module.network.subnet[0]
+      subnet_id                   = module.network.public_subnet[0]
       private_ip                  = "10.0.10.11"
       instance_type               = "t2.micro"
       root_block_device           = [{ volume_size = "20", volume_type = "gp2" }]
