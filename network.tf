@@ -12,13 +12,37 @@ module "network" {
 #######################
 security_group = {
 #######################
-  test-web = {
+  test-web1 = {
     ingress = {
       http = {
       protocol = "tcp"
       from_port = 80
       to_port   = 80
-      cidr_blocks = ["0.0.0.0/0",]
+      cidr_blocks = ["0.0.0.0/0","10.0.10.0/24"]
+      }
+     }
+    egress = {
+    }
+  }
+  test-web2 = {
+    ingress = {
+      http = {
+      protocol = "tcp"
+      from_port = 80
+      to_port   = 80
+      cidr_blocks = ["0.0.0.0/0","10.0.11.0/24"]
+      }
+     }
+    egress = {
+    }
+  }
+  test-web3 = {
+    ingress = {
+      http = {
+      protocol = "tcp"
+      from_port = 80
+      to_port   = 80
+      cidr_blocks = ["0.0.0.0/0","10.0.12.0/24"]
       }
      }
     egress = {
