@@ -53,9 +53,18 @@ resource "aws_security_group" "sg" {
   for_each = var.security_group
   name   = each.key
   description = "${each.key} description"
-
   vpc_id = var.vpc_id
   tags = {
     Name = each.key
   }
+}
+resource "aws_security_group_rule" "ingress" {
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "tcp"
+  cidr_blocks       = [aws_vpc.example.cidr_block]
+  ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+  security_group_id = module.network.aws_security_group.sg[var.security_group]
+
 }
