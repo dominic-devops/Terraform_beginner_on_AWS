@@ -58,27 +58,4 @@ resource "aws_security_group" "sg" {
   tags = {
     Name = each.key
   }
-  
-  dynamic "ingress"{
-  for_each = each.value.ingress
-  iterator = in
-  content {
-    description = "${in.key} description"
-    from_port   = in.value["from_port"]
-    to_port     = in.value["to_port"]
-    protocol    = in.value["protocol"]
-    cidr_blocks = in.value["cidr_blocks"]
-    }
-  }
-  dynamic "egress"{
-  for_each = each.value.egress
-  iterator = out
-  content {
-    description = "${out.key} description"
-    from_port   = out.value["from_port"]
-    to_port     = out.value["to_port"]
-    protocol    = out.value["protocol"]
-    cidr_blocks = out.value["cidr_blocks"]
-    }
-  }
 }

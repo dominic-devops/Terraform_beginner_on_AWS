@@ -25,18 +25,6 @@ variable "pub_sub_cidr" {
 }
 variable "security_group" {
   type = map(object({
-  ingress = map(object({
-    from_port = number
-    to_port   = number
-    protocol = string
-    cidr_blocks = list(string)
-  }))
-  egress = map(object({
-    from_port = number
-    to_port   = number
-    protocol = string
-    cidr_blocks = list(string)
-  }))
   }))
   default = {}
 }
