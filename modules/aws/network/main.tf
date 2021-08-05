@@ -46,9 +46,22 @@ resource "aws_route_table_association" "public_rt_asso" {
   subnet_id      = aws_subnet.public_subnet.*.id[count.index]
   route_table_id = aws_route_table.public_rt.id
 }
-#################################
-##### SG Module [21-07-21] ######
-#################################
+
+########################
+##### [SG Module] ######
+########################
+
+
+#resource "aws_security_group_rule" "ingress" {
+#  for_each = var.sg_rule
+#  type              = "ingress"
+#  from_port         = 0
+#  to_port           = 65535
+#  protocol          = "tcp"
+#  cidr_blocks       = [aws_vpc.example.cidr_block]
+#  ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
+#  security_group_id = module.network.aws_security_group.sg[var.security_group]
+#}
 resource "aws_security_group" "sg" {
   for_each = var.security_group
   name   = each.key
@@ -57,14 +70,14 @@ resource "aws_security_group" "sg" {
   tags = {
     Name = each.key
   }
-}
-resource "aws_security_group_rule" "ingress" {
-  type              = "ingress"
-  from_port         = 0
-  to_port           = 65535
-  protocol          = "tcp"
-  cidr_blocks       = [aws_vpc.example.cidr_block]
-  ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-  security_group_id = module.network.aws_security_group.sg[var.security_group]
-
+  ingress     = var.ingress
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  lifecycle {
+    create_before_destroy = true
+  }
 }

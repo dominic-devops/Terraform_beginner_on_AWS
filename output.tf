@@ -16,5 +16,5 @@ output "ec2_info" {
       ins.private_ip,
       ins.public_ip,
     )
-  ] 
+  ]
 }

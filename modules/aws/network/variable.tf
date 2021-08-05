@@ -24,7 +24,7 @@ variable "pub_sub_cidr" {
     type        = list
 }
 variable "security_group" {
-  type = map(object({
-  }))
-  default = {}
+}
+variable "ingress" {
+  type    = list
 }
