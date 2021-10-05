@@ -1,7 +1,3 @@
-variable "env_name" {
-    description = "Set env name "
-    type        = string
-}
 ### VPC ###
 variable "vpc_name" {
     description = "Set VPC name "

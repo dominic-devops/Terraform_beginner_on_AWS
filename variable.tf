@@ -6,15 +6,12 @@ variable "profile" {
     publishing = "XXX"
     team       = "Ops팀"
     admin      = "Dominic"
+    env        = "DEV" 
   }
 }
 variable "vpc_name" {
   description = "Set VPC NAME"
   default     = "terraform"
-}
-variable "env_name" {
-  description = "Set ENV NAME"
-  default     = "DEV"
 }
 variable "vpc_cidr" {
   description = "Set VPC CIDR"
