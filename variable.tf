@@ -1,21 +1,21 @@
-# Set Enviroment 
+# Set Enviroment
 variable "profile" {
   default = { ##메모##
-    account    = "XXXXXXXXX"
-    kname      = "AWS-테라폼"
-    publishing = "XXX"
-    team       = "Ops팀"
-    admin      = "Dominic"
-    env        = "DEV" 
+    account    = "154536042159" ##change
+    kname      = "AWS-테라폼테스트" ##change
+    publishing = "XXX" ##change
+    team       = "인프라서비스팀" ##change
+    admin      = "Dominic" ## change
+    env        = "DEV"  ## change
   }
 }
 variable "vpc_name" {
   description = "Set VPC NAME"
-  default     = "terraform"
+  default     = "terraform" ##change
 }
 variable "vpc_cidr" {
   description = "Set VPC CIDR"
-  default     = "10.0.0.0/16"
+  default     = "10.0.0.0/16" ##change
 }
 variable "avail_zones" {
   type    = list(any)
@@ -28,5 +28,5 @@ variable "public_subnet" {
 
 variable "key_name" {
   type    = string
-  default = "home-test"
+  default = "infra-test"
 }

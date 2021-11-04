@@ -1,6 +1,4 @@
-#################################
-##### VPC Module [21-07-21] #####
-#################################
+### VPC Module ###
 resource "aws_vpc" "vpc" {
     cidr_block = var.vpc_cidr
     instance_tenancy = "default"
@@ -46,36 +44,34 @@ resource "aws_route_table_association" "public_rt_asso" {
   subnet_id      = aws_subnet.public_subnet.*.id[count.index]
   route_table_id = aws_route_table.public_rt.id
 }
+#sg
 
-########################
-##### [SG Module] ######
-########################
-
-
-#resource "aws_security_group_rule" "ingress" {
-#  for_each = var.sg_rule
-#  type              = "ingress"
-#  from_port         = 0
-#  to_port           = 65535
-#  protocol          = "tcp"
-#  cidr_blocks       = [aws_vpc.example.cidr_block]
-#  ipv6_cidr_blocks  = [aws_vpc.example.ipv6_cidr_block]
-#  security_group_id = module.network.aws_security_group.sg[var.security_group]
-#}
-resource "aws_security_group" "sg" {
-  for_each = var.security_group
-  name   = each.key
-  description = "${each.key} description"
+resource "aws_security_group" "allow" {
+  for_each = var.sg_allow
   vpc_id = var.vpc_id
+}
+
+resource "aws_security_group_rule" "allow_rules" {
+  for_each = var.sg_allow
+  vpc_id = var.vpc_id
+  name   = each.key
+
+  description = "${each.key} description"
+  type  = each.value.type
+  cidr = each.value.cidr
+  protocol = each.value.protocol
+  
+  dynamic "allow"{
+    for_each = [for rule in each.value.rules : rule if each.value.type == "allow"]
+    iterator = rule
+    content {
+      protocol  = rule.value.protocol
+      to_port   = rule.value.to_port
+      from_port = rule.value.from_port
+    }
+  }
   tags = {
     Name = each.key
-  }
-  ingress     = var.ingress
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
   }
   lifecycle {
     create_before_destroy = true

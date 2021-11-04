@@ -19,8 +19,16 @@ variable "pub_sub_cidr" {
     description = "Set Public Subnet CIDR"
     type        = list
 }
-variable "security_group" {
-}
-variable "ingress" {
-  type    = list
+variable "sg_allow" {
+    type = map(object({
+      type              = string
+      cidr              = list(string)
+      protocol          = string
+      rules = list(object({
+          protocol  = string
+          to_port   = list(string)
+          from_port = list(string)
+      }))
+    }))
+    default = {}
 }

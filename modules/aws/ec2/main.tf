@@ -10,7 +10,7 @@ resource "aws_instance" "ec2" {
   key_name                    = var.key_name
   disable_api_termination     = false
   associate_public_ip_address = true
-  ebs_optimized = "true" ## Instance 타입별 상이
+  #ebs_optimized = "true" ## Instance 타입별 상이
   
   dynamic "root_block_device" {
     for_each = each.value.root_block_device == null ? [] : each.value.root_block_device
