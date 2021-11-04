@@ -45,35 +45,50 @@ resource "aws_route_table_association" "public_rt_asso" {
   route_table_id = aws_route_table.public_rt.id
 }
 #sg
-
 resource "aws_security_group" "allow" {
   for_each = var.sg_allow
   vpc_id = var.vpc_id
-}
 
-resource "aws_security_group_rule" "allow_rules" {
-  for_each = var.sg_allow
-  vpc_id = var.vpc_id
-  name   = each.key
-
-  description = "${each.key} description"
-  type  = each.value.type
-  cidr = each.value.cidr
-  protocol = each.value.protocol
-  
-  dynamic "allow"{
-    for_each = [for rule in each.value.rules : rule if each.value.type == "allow"]
-    iterator = rule
+  dynamic "ingress"{
+    for_each = var.sg_allow
+    iterator = role
     content {
-      protocol  = rule.value.protocol
-      to_port   = rule.value.to_port
-      from_port = rule.value.from_port
+      protocol  = role.value.protocol
+      cidr_blocks  = role.value.cidr_blocks
+      to_port   = role.value.to_port
+      from_port = role.value.from_port
     }
   }
-  tags = {
-    Name = each.key
-  }
-  lifecycle {
-    create_before_destroy = true
-  }
 }
+
+#resource "aws_security_group" "allow" {
+#  for_each = var.sg_allow
+#  vpc_id = var.vpc_id
+#}
+
+#resource "aws_security_group_rule" "allow_rules" {
+#  for_each = var.sg_allow
+#  vpc_id = var.vpc_id
+#  name   = each.key#
+
+#  description = "${each.key} description"
+#  type  = each.value.type
+#  cidr = each.value.cidr
+#  protocol = each.value.protocol
+  
+#  dynamic "allow"{
+#    for_each = [for rule in each.value.rules : rule if each.value.type == "allow"]
+#    iterator = rule
+#    content {
+#      protocol  = rule.value.protocol
+#      to_port   = rule.value.to_port
+#      from_port = rule.value.from_port
+#    }
+#  }
+#  tags = {
+#    Name = each.key
+#  }
+#  lifecycle {
+#    create_before_destroy = true
+#  }
+#}

@@ -10,18 +10,21 @@ module "network" {
 
  ########Inbound rule##########
  sg_allow = {
- ############################
+ ##############################
    test-web = {
-         type        ="ingress"
-         protocol    = "tcp"
-         cidr        = ["0.0.0.0/0"]
-         rules = [
-           {
-             protocol = "tcp"
-             to_port = [ "22" ]
-             from_port = [ "50" ]
-           }
-         ]
-   }
- }
+     ingress = [
+      {
+        rules = [
+          {
+        protocol     = "tcp"
+        cidr_blocks  = ["10.0.0.0/8"]
+        to_port      = ["22"]
+        from_port    = ["33"]
+         }
+        ]
+      }
+    ]
+  }
+####end####    
+  }
 }

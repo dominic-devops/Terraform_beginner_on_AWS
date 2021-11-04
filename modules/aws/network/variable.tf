@@ -21,14 +21,14 @@ variable "pub_sub_cidr" {
 }
 variable "sg_allow" {
     type = map(object({
-      type              = string
-      cidr              = list(string)
-      protocol          = string
+        ingress = list(object({
       rules = list(object({
-          protocol  = string
-          to_port   = list(string)
-          from_port = list(string)
+          protocol      = string
+          cidr_blocks   = list(string)
+          to_port       = list(string)
+          from_port     = list(string)
       }))
     }))
+ }))
     default = {}
 }
