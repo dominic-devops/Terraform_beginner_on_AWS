@@ -12,7 +12,7 @@ aws v3.61.0
 ```
     {인스턴스 명} = {
       image                       = {"ami-id 입력"}
-      subnet_id                   = module.network.public_subnets_ids[0]
+      subnet_id                   = module.network.{public/private}_subnets_ids[{0,1,2,3...variable 참고}]
       private_ip                  = {"private cidr 입력"}
       instance_type               = {"인스턴스 타입 입력"}
       associate_public_ip_address = {"public ip 활성화 여부 [ture/false]"}
@@ -20,27 +20,13 @@ aws v3.61.0
 ```
 ### EC2 module Output
 ```
+1.ec2_info
 Instance id | Instanec type | private IP | public IP
+
+2.private_subnet_info
+Subnet_Cidr | AZ
+
+3.public_subnet_info
+Subnet_Cidr | AZ
 ```
 ### Network module Input
-1. 통합 variable 내 프로젝트 정의 [variable.tf 참고]
-```
-    {SG 명 입력} = {
-        ingress = {
-            {Type 입력} = {
-            protocol = {"protocol 입력"}
-            from_port = {"port_range 입력"}
-            to_port   = {"port_range 입력"}
-            cidr_blocks = ["Cidr 대역 입력",]
-            }
-        }
-        egress = {
-            {Type 입력} = {
-            protocol = {"protocol 입력"}
-            from_port = {"port_range 입력"}
-            to_port   = {"port_range 입력"}
-            cidr_blocks = ["Cidr 대역 입력",]
-            }
-        }
-    }
-```

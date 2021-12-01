@@ -12,6 +12,10 @@ output "public_subnet" {
   description = "Public Subnet ID list"
   value       = aws_subnet.public_subnet.*.id
 }
+output "private_subnet" {
+  description = "Private Subnet ID list"
+  value       = aws_subnet.private_subnet.*.id
+}
 # internet gateway
 output "igw_id" {
   description = "Interget Gateway ID"
@@ -22,6 +26,9 @@ output "public_route_table_ids" {
   description = "Public Route Table ID list"
   value       = aws_route_table.public_rt.*.id
 }
-output "self_link" {
+output "public_link" {
     value       = aws_subnet.public_subnet
+}
+output "private_link" {
+    value       = aws_subnet.private_subnet
 }

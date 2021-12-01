@@ -1,7 +1,7 @@
 # Set Enviroment
 variable "profile" {
   default = { ##메모##
-    account    = "154536042159" ##change
+    account    = "XXXXXXXXXXX" ##change
     kname      = "AWS-테라폼테스트" ##change
     publishing = "XXX" ##change
     team       = "인프라서비스팀" ##change
@@ -19,14 +19,17 @@ variable "vpc_cidr" {
 }
 variable "avail_zones" {
   type    = list(any)
-  default = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1a"]
+  default = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1a"] ##change
 }
 variable "public_subnet" {
   type    = list(any)
-  default = ["10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
+  default = ["10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"] ##change
 }
-
+variable "private_subnet" {
+  type    = list(any)
+  default = ["10.0.20.0/24", "10.0.21.0/24", "10.0.22.0/24"] ##change
+}
 variable "key_name" {
   type    = string
-  default = "infra-test"
+  default = "terraform" ##change
 }

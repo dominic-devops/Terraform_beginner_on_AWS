@@ -9,7 +9,7 @@ resource "aws_instance" "ec2" {
   private_ip                  = each.value.private_ip
   key_name                    = var.key_name
   disable_api_termination     = false
-  associate_public_ip_address = true
+  associate_public_ip_address = var.public_ip ## default false
   #ebs_optimized = "true" ## Instance 타입별 상이
   
   dynamic "root_block_device" {

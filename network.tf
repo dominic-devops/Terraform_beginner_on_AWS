@@ -7,24 +7,5 @@ module "network" {
 
   avail_zones  = var.avail_zones
   pub_sub_cidr = var.public_subnet
-
- ########Inbound rule##########
- sg_allow = {
- ##############################
-   test-web = {
-     ingress = [
-      {
-        rules = [
-          {
-        protocol     = "tcp"
-        cidr_blocks  = ["10.0.0.0/8"]
-        to_port      = ["22"]
-        from_port    = ["33"]
-         }
-        ]
-      }
-    ]
-  }
-####end####    
-  }
+  pri_sub_cidr = var.private_subnet
 }

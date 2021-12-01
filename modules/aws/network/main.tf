@@ -16,7 +16,7 @@ resource "aws_subnet" "public_subnet" {
     availability_zone = var.avail_zones[count.index]
 
     tags = {
-        Name = "${var.vpc_name}-sub-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
+        Name = "${var.vpc_name}-public_subnet-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
     }    
   }
 
@@ -44,22 +44,35 @@ resource "aws_route_table_association" "public_rt_asso" {
   subnet_id      = aws_subnet.public_subnet.*.id[count.index]
   route_table_id = aws_route_table.public_rt.id
 }
-#sg
-resource "aws_security_group" "allow" {
-  for_each = var.sg_allow
-  vpc_id = var.vpc_id
+####################################################
 
-  dynamic "ingress"{
-    for_each = var.sg_allow
-    iterator = role
-    content {
-      protocol  = role.value.protocol
-      cidr_blocks  = role.value.cidr_blocks
-      to_port   = role.value.to_port
-      from_port = role.value.from_port
-    }
+resource "aws_subnet" "private_subnet" {
+    count             = length(var.pri_sub_cidr)
+    vpc_id            = var.vpc_id
+    cidr_block        = var.pri_sub_cidr[count.index]
+    availability_zone = var.avail_zones[count.index]
+
+    tags = {
+        Name = "${var.vpc_name}-private_subnet-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
+    }    
   }
-}
+
+#sg
+#resource "aws_security_group" "allow" {
+#  for_each = var.sg_allow
+#  vpc_id = var.vpc_id
+#
+#  dynamic "ingress"{
+#    for_each = var.sg_allow
+#    iterator = role
+#    content {
+#      protocol  = role.value.protocol
+#      cidr_blocks  = role.value.cidr_blocks
+#      to_port   = role.value.to_port
+#      from_port = role.value.from_port
+#    }
+#  }
+#}
 
 #resource "aws_security_group" "allow" {
 #  for_each = var.sg_allow
