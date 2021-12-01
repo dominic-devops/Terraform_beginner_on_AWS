@@ -1,6 +1,6 @@
 # Set Enviroment
 variable "profile" {
-  default = { ##메모##
+  default = {
     account    = "XXXXXXXXXXX" ##change
     kname      = "AWS-테라폼테스트" ##change
     publishing = "XXX" ##change
