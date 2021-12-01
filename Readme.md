@@ -19,7 +19,6 @@ aws v3.61.0
       root_block_device           = [{ volume_size = {"GB 입력"}, volume_type = {"EBS 타입 입력"} }]
 ```
 ### EC2 module Output
-```
 1.ec2_info
 Instance id | Instanec type | private IP | public IP
 
@@ -28,7 +27,8 @@ Subnet_Cidr | AZ
 
 3.public_subnet_info
 Subnet_Cidr | AZ
-################# example ####################
+
+```
 ec2_info = [
   "i-05f81e58f65cc30f3, t2.micro, 10.0.20.11, ",
   "i-0be1b4d1d55420f57, t2.micro, 10.0.10.11, ",
