@@ -50,11 +50,11 @@ variable "key_name" {
 ```
     {인스턴스 명} = {
       image                       = {"ami-id 입력"} ## change
-      subnet_id                   = module.network.{public/private}_subnets_ids[{0,1,2,3...variable 참고}] ## change
-      private_ip                  = {"private cidr 입력"} ## change
-      instance_type               = {"인스턴스 타입 입력"} ## change
+      subnet_id                   = module.network.{public/private}_subnets_ids[{0,1,2,3..}] ## change
+      private_ip                  = {"subnet cidr"} ## change
+      instance_type               = {"인스턴스 타입"} ## change
       associate_public_ip_address = {"public ip 활성화 여부 [ture/false]"} ## change
-      root_block_device           = [{ volume_size = {"GB 입력"}, volume_type = {"EBS 타입 입력"} }] ## change
+      root_block_device           = [{ volume_size = {"GB입력"}, volume_type = {"EBS 타입"} }] ## change
 ```
 ### EC2 module Output
 1.ec2_info : 
