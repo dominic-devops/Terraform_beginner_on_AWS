@@ -28,5 +28,20 @@ Subnet_Cidr | AZ
 
 3.public_subnet_info
 Subnet_Cidr | AZ
+################# example ####################
+ec2_info = [
+  "i-05f81e58f65cc30f3, t2.micro, 10.0.20.11, ",
+  "i-0be1b4d1d55420f57, t2.micro, 10.0.10.11, ",
+]
+private_subnet_info = [
+  "10.0.20.0/24,ap-northeast-1a",
+  "10.0.21.0/24,ap-northeast-1c",
+  "10.0.22.0/24,ap-northeast-1a",
+]
+public_subnet_info = [
+  "10.0.10.0/24,ap-northeast-1a",
+  "10.0.11.0/24,ap-northeast-1c",
+  "10.0.12.0/24,ap-northeast-1a",
+]
 ```
 ### Network module Input
