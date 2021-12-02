@@ -23,16 +23,17 @@ variable "pri_sub_cidr" {
     description = "Set private Subnet CIDR"
     type        = list
 }
-#variable "sg_allow" {
-#    type = map(object({
-#        ingress = list(object({
-#      rules = list(object({
-#          protocol      = string
-#          cidr_blocks   = list(string)
-#          to_port       = list(string)
-#          from_port     = list(string)
-#      }))
-#    }))
-# }))
-#    default = {}
-#}
+variable "sg_rule" {
+  type = map(object({
+    ingress = list(object({
+      ranges = list(string)
+      protocol = string
+      ports    = number
+      desc     = string
+    }))
+  }))
+  default = {}
+}
+variable "depends_on_list" {
+  default = []
+}

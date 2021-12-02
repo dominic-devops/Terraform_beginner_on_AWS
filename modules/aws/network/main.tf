@@ -56,52 +56,25 @@ resource "aws_subnet" "private_subnet" {
         Name = "${var.vpc_name}-private_subnet-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
     }    
   }
-
 #sg
-#resource "aws_security_group" "allow" {
-#  for_each = var.sg_allow
-#  vpc_id = var.vpc_id
-#
-#  dynamic "ingress"{
-#    for_each = var.sg_allow
-#    iterator = role
-#    content {
-#      protocol  = role.value.protocol
-#      cidr_blocks  = role.value.cidr_blocks
-#      to_port   = role.value.to_port
-#      from_port = role.value.from_port
-#    }
-#  }
-#}
+resource "aws_security_group" "sg_allow" {
+  for_each    = var.sg_rule
+  vpc_id      = var.vpc_id
+  name        = each.key
+  description = each.key
+  tags = {
+    Name = each.key
+  }
 
-#resource "aws_security_group" "allow" {
-#  for_each = var.sg_allow
-#  vpc_id = var.vpc_id
-#}
-
-#resource "aws_security_group_rule" "allow_rules" {
-#  for_each = var.sg_allow
-#  vpc_id = var.vpc_id
-#  name   = each.key#
-
-#  description = "${each.key} description"
-#  type  = each.value.type
-#  cidr = each.value.cidr
-#  protocol = each.value.protocol
-  
-#  dynamic "allow"{
-#    for_each = [for rule in each.value.rules : rule if each.value.type == "allow"]
-#    iterator = rule
-#    content {
-#      protocol  = rule.value.protocol
-#      to_port   = rule.value.to_port
-#      from_port = rule.value.from_port
-#    }
-#  }
-#  tags = {
-#    Name = each.key
-#  }
-#  lifecycle {
-#    create_before_destroy = true
-#  }
-#}
+  dynamic "ingress" {
+    for_each = [for rule in each.value.ingress : rule]
+    iterator = rule
+    content {
+      cidr_blocks = rule.value.ranges
+      protocol    = rule.value.protocol
+      from_port   = rule.value.ports
+      to_port     = rule.value.ports
+      description = rule.value.desc
+     }
+  }
+}
