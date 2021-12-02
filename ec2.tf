@@ -10,7 +10,7 @@ module "ec2_instance" {
       subnet_id                   = module.network.public_subnet[0] ## change
       private_ip                  = "10.0.10.11" ## change
       instance_type               = "t2.micro" ## change
-      vpc_security_group_ids      = ["sg-0047d8f96587b7f74"]
+      vpc_security_group_ids      = ["sg-0047d8f96587b7f74","sg-07f8db24fdb00eae7"] ## change
 
       root_block_device           = [{ volume_size = "100", volume_type = "gp2" }] ## change
 
@@ -20,7 +20,7 @@ module "ec2_instance" {
       subnet_id                   = module.network.private_subnet[0] ## change
       private_ip                  = "10.0.100.11" ## change
       instance_type               = "t2.micro"  ## change
-      vpc_security_group_ids      = ["sg-0047d8f96587b7f74"]
+      vpc_security_group_ids      = ["sg-0047d8f96587b7f74","sg-07f8db24fdb00eae7"]
 
       root_block_device           = [{ volume_size = "100", volume_type = "gp2" }] ## change
     }
