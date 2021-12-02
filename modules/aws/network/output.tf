@@ -26,9 +26,11 @@ output "public_route_table_ids" {
   description = "Public Route Table ID list"
   value       = aws_route_table.public_rt.*.id
 }
-output "public_link" {
-    value       = aws_subnet.public_subnet
-}
+
 output "private_link" {
     value       = aws_subnet.private_subnet
+}
+
+output "public_link" {
+    value       = aws_subnet.public_subnet
 }

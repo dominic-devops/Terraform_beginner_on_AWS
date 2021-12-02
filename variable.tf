@@ -27,7 +27,7 @@ variable "public_subnet" {
 }
 variable "private_subnet" {
   type    = list(any)
-  default = ["10.0.20.0/24", "10.0.21.0/24", "10.0.22.0/24"] ##change
+  default = ["10.0.100.0/24",] ##change
 }
 variable "key_name" {
   type    = string
