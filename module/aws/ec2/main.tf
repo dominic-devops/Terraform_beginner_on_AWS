@@ -1,3 +1,6 @@
+
+
+
 resource "aws_instance" "ec2" {
   for_each                    = var.ec2_instance
   tags = {
@@ -10,9 +13,9 @@ resource "aws_instance" "ec2" {
   key_name                    = var.key_name
   disable_api_termination     = false
   associate_public_ip_address = var.public_ip ## default false
+  vpc_security_group_ids       = each.value.vpc_security_group_ids
+
   #ebs_optimized = "true" ## Instance 타입별 상이
-  
-  vpc_security_group_ids      = each.value.vpc_security_group_ids
 
   dynamic "root_block_device" {
     for_each = each.value.root_block_device == null ? [] : each.value.root_block_device

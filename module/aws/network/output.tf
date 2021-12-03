@@ -27,6 +27,7 @@ output "public_route_table_ids" {
   value       = aws_route_table.public_rt.*.id
 }
 
+#subnet
 output "private_link" {
     value       = aws_subnet.private_subnet
 }
@@ -34,3 +35,8 @@ output "private_link" {
 output "public_link" {
     value       = aws_subnet.public_subnet
 }
+
+output "sg_link" {
+    value       = aws_security_group.sg_allow
+}
+

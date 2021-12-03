@@ -1,19 +1,27 @@
-output "public_subnet_info" {
+output "subnet_info" {
   value = [
     for ins in module.network.public_link :
-    format("%s,%s",
+    format("%s, %s",
       ins.cidr_block,
       ins.availability_zone,
     )
   ]
 }
-
 output "private_subnet_info" {
   value = [
     for ins in module.network.private_link :
-    format("%s,%s",
+    format("%s, %s",
       ins.cidr_block,
       ins.availability_zone,
+    )
+  ]
+}
+output "sg_info" {
+  value = [
+    for ins in module.network.sg_link :
+    format("%s : %s",
+      ins.name,
+      ins.id,
     )
   ]
 }
