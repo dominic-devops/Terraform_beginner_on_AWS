@@ -12,7 +12,7 @@ resource "aws_instance" "ec2" {
   private_ip                  = each.value.private_ip
   key_name                    = var.key_name
   disable_api_termination     = false
-  associate_public_ip_address = var.public_ip ## default false
+#  associate_public_ip_address = var.public_ip ## default false
   vpc_security_group_ids       = each.value.vpc_security_group_ids
 
   #ebs_optimized = "true" ## Instance 타입별 상이
@@ -28,4 +28,9 @@ resource "aws_instance" "ec2" {
         }
     }
   }
+}
+
+resource "aws_eip" "this" {
+  vpc = true
+#  name = "test"
 }

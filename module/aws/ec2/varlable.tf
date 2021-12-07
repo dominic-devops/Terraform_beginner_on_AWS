@@ -13,11 +13,11 @@ variable "ec2_instance" {
     default = {}
 }
 
-variable "public_ip" {
-  description = "public_ip ture/false"
-  type        = bool
-  default     = "false"
-}
+#variable "public_ip" {
+#  description = "public_ip ture/false"
+#  type        = bool
+#  default     = "false"
+#}
 variable "key_name" {
   description = "The key name to use for the instance"
   type        = string
