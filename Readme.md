@@ -4,7 +4,6 @@ aws v3.61.0
 ### 사용 방법
 1. AWS IAM console 내 Terraform 용 계정 Access/Secret Key 발급
 2. .aws/credentials 내 추가 후 [provider.tf] 경로 수정 필요
-ㄴ 프로필 별 설정 가능
 3. terraform init을 통해 모듈 불러온 뒤, terrafrom plan으로 구성 확인 후, apply로 동작확인
 4. EC2 프로비저닝 전, 콘솔에서 key-pair 생성 후 [variable.tf] 수정 필요
 ### 초기환경 셋팅
