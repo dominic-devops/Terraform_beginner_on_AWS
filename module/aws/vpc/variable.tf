@@ -31,6 +31,12 @@ variable "sg_rule" {
       ports    = number
       desc     = string
     }))
+    egress = list(object({
+      ranges = list(string)
+      protocol = string
+      ports    = number
+      desc     = string
+    }))
   }))
   default = {}
 }

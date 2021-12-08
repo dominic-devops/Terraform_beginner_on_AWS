@@ -56,7 +56,7 @@ resource "aws_subnet" "private_subnet" {
         Name = "${var.vpc_name}-private_subnet-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
     }    
   }
-#sg
+###########sg
 resource "aws_security_group" "sg_allow" {
   for_each    = var.sg_rule
   vpc_id      = var.vpc_id
@@ -65,16 +65,27 @@ resource "aws_security_group" "sg_allow" {
   tags = {
     Name = each.key
   }
-
+ 
   dynamic "ingress" {
-    for_each = [for rule in each.value.ingress : rule]
-    iterator = rule
+    for_each = [for ing in each.value.ingress : ing]
+    iterator = ing
     content {
-      cidr_blocks = rule.value.ranges
-      protocol    = rule.value.protocol
-      from_port   = rule.value.ports
-      to_port     = rule.value.ports
-      description = rule.value.desc
+      cidr_blocks = ing.value.ranges
+      protocol    = ing.value.protocol
+      from_port   = ing.value.ports
+      to_port     = ing.value.ports
+      description = ing.value.desc
+     }
+  }
+  dynamic "egress" {
+    for_each = [for eg in each.value.ingress : eg]
+    iterator = eg
+    content {
+      cidr_blocks = eg.value.ranges
+      protocol    = eg.value.protocol
+      from_port   = eg.value.ports
+      to_port     = eg.value.ports
+      description = eg.value.desc
      }
   }
 }

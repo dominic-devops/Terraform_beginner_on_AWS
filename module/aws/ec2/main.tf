@@ -1,6 +1,3 @@
-
-
-
 resource "aws_instance" "ec2" {
   for_each                    = var.ec2_instance
   tags = {
@@ -29,8 +26,10 @@ resource "aws_instance" "ec2" {
     }
   }
 }
-
-resource "aws_eip" "this" {
-  vpc = true
-#  name = "test"
+resource "aws_eip" "elasticip" {
+  for_each = var.ec2_instance
+  tags = {
+    Name = each.key
+  }
+  instance = aws_instance.ec2[each.key].id
 }

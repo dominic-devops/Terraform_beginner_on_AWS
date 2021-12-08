@@ -1,6 +1,6 @@
 # VPC Module
 module "network" {
-  source   = "./module/aws/network"
+  source   = "./module/aws/vpc"
   vpc_name = var.vpc_name
   vpc_cidr = var.vpc_cidr
   vpc_id   = module.network.vpc_id
@@ -19,18 +19,34 @@ module "network" {
       ranges = [var.vpc_cidr]
       protocol = "-1"
       ports    = "0"
-      desc     = "Allow internal traffic"
+      desc     = "ingressAllow internal traffic"
       },     
     ]
+    egress = [   
+    ]  
   }
   terraform-ssh = {
     ingress = [ 
       {
-      ranges = ["0.0.0.0/0", "10.0.0.0/16"]
+      ranges = ["0.0.0.0/0"]
       protocol = "tcp"
       ports    = "22"
       desc     = "Allow ALL ssh"
       },      
+    ]
+    egress = [ 
+    ]
+  }
+  outbound = {
+    ingress = [       
+    ]
+    egress = [ 
+      {
+      ranges = ["0.0.0.0/0"]
+      protocol = "-1"
+      ports    = "0"
+      desc     = "outbound ALL traffic"
+      }, 
     ]
   }
 #####
