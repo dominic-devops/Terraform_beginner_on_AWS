@@ -58,10 +58,12 @@ variable "key_name" {
 ```
 ### EC2 module Output
 1.ec2_info : 
+
 Instance id | Instanec type | private IP | public IP
 
 2.sg info :
- Tag : sg id
+
+Tag : sg id
 
 ```
 ec2_info = [
@@ -77,11 +79,14 @@ sg_info = [
 ```
 ### Network module Input
 1.private_subnet_info : 
+
 Subnet_Cidr | AZ
 
 2.public_subnet_info : 
-```
+
 Subnet_Cidr | AZ
+
+```
 private_subnet_info = [
   "10.0.100.0/24,ap-northeast-1a",
   "10.0.101.0/24,ap-northeast-1c",
