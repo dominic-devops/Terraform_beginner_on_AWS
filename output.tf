@@ -1,4 +1,4 @@
-output "subnet_info" {
+output "public_subnet_info" {
   value = [
     for ins in module.network.public_link :
     format("%s, %s",
@@ -16,15 +16,6 @@ output "private_subnet_info" {
     )
   ]
 }
-output "sg_info" {
-  value = [
-    for ins in module.network.sg_link :
-    format("%s : %s",
-      ins.name,
-      ins.id,
-    )
-  ]
-}
 output "ec2_info" {
   value = [
     for ins in module.ec2_instance.ec2_link :
@@ -32,6 +23,15 @@ output "ec2_info" {
       ins.id,
       ins.instance_type,
       ins.private_ip,
+    )
+  ]
+}
+output "sg_info" {
+  value = [
+    for ins in module.network.sg_link :
+    format("%s : %s",
+      ins.name,
+      ins.id,
     )
   ]
 }

@@ -59,7 +59,8 @@ variable "key_name" {
 ### EC2 module Output
 1.ec2_info : 
 Instance id | Instanec type | private IP | public IP
-
+2.sg info :
+ Tag : sg id
 2.private_subnet_info : 
 Subnet_Cidr | AZ
 
@@ -71,11 +72,17 @@ ec2_info = [
   "i-05f81e58f65cc30f3, t2.micro, 10.0.20.11, ",
   "i-0be1b4d1d55420f57, t2.micro, 10.0.10.11, ",
 ]
+sg_info = [
+  "internal : sg-059d51f6c7cab1231",
+  "outbound : sg-012a97c5860ea7e44",
+  "terraform-ssh : sg-0eb5edf0ddf97523b",
+]
 private_subnet_info = [
   "10.0.20.0/24,ap-northeast-1a",
   "10.0.21.0/24,ap-northeast-1c",
   "10.0.22.0/24,ap-northeast-1a",
 ]
+
 public_subnet_info = [
   "10.0.10.0/24,ap-northeast-1a",
   "10.0.11.0/24,ap-northeast-1c",
