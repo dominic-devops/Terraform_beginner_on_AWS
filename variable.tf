@@ -2,9 +2,9 @@
 variable "profile" {
   default = {
     account    = "XXXXXXXXXXX" ##change
-    kname      = "AWS-테라폼테스트" ##change
+    kname      = "AWS-테라폼" ##change
     publishing = "XXX" ##change
-    team       = "인프라서비스팀" ##change
+    team       = "AWSKRUG" ##change
     admin      = "Dominic" ## change
     env        = "DEV"  ## change
   }
