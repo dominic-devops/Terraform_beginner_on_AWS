@@ -19,7 +19,7 @@ variable "vpc_cidr" {
 }
 variable "avail_zones" {
   type    = list(any)
-  default = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1a"] ##changes
+  default = ["ap-northeast-1a", "ap-northeast-1c"] ##changes
 }
 variable "public_subnet" {
   type    = list(any)
