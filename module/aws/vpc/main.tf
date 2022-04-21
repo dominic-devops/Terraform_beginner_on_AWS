@@ -78,7 +78,7 @@ resource "aws_security_group" "sg_allow" {
      }
   }
   dynamic "egress" {
-    for_each = [for eg in each.value.ingress : eg]
+    for_each = [for eg in each.value.egress : eg]
     iterator = eg
     content {
       cidr_blocks = eg.value.ranges
