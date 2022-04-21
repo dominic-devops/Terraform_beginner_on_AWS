@@ -18,14 +18,16 @@ resource "aws_instance" "ec2" {
     for_each = each.value.root_block_device == null ? [] : each.value.root_block_device
     content {
       delete_on_termination = "true"
+      encrypted             = "true"
       volume_size           = lookup(root_block_device.value, "volume_size", null)
       volume_type           = lookup(root_block_device.value, "volume_type", null)
       tags                  = {
-        Name = "${each.key}-root-disk"
+        Name = "${each.key}"
         }
     }
   }
 }
+
 resource "aws_eip" "elasticip" {
   for_each = var.ec2_instance
   tags = {
