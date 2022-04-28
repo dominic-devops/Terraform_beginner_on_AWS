@@ -40,6 +40,3 @@ variable "sg_rule" {
   }))
   default = {}
 }
-variable "depends_on_list" {
-  default = []
-}

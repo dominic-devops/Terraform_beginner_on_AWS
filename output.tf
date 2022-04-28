@@ -19,10 +19,11 @@ output "private_subnet_info" {
 output "ec2_info" {
   value = [
     for ins in module.ec2_instance.ec2_link :
-    format("%s, %s, %s",
-      ins.id,
+    format("%s, %s, %s, %s",
       ins.instance_type,
       ins.private_ip,
+      ins.public_ip,
+      ins.id,
     )
   ]
 }

@@ -14,7 +14,7 @@ resource "aws_subnet" "public_subnet" {
     vpc_id            = var.vpc_id
     cidr_block        = var.pub_sub_cidr[count.index]
     availability_zone = var.avail_zones[count.index]
-    map_public_ip_on_launch = true
+    map_public_ip_on_launch = false
     tags = {
         Name = "${var.vpc_name}-public_subnet-${substr(var.avail_zones[count.index],-1,1)}-${count.index+1}"
     }    
